@@ -3,12 +3,22 @@ package main
 import "fmt"
 
 func ArrayMerge(arrayA, arrayB []string) []string {
-	return append(arrayA, arrayB...)
+	result := []string{}
+	uniqueMap := map[string]bool{}
+	mergeSlice := append(arrayA, arrayB...)
+	for _, value := range mergeSlice {
+		_, isFound := uniqueMap[value]
+		if !isFound {
+			result = append(result, value)
+			uniqueMap[value] = true
+		}
+	}
+	return result
 }
 
 func main() {
 	arrayA := []string{"ayam", "burung", "cicak"}
-	arrayB := []string{"domba", "entok", "fanta"}
+	arrayB := []string{"domba", "entok", "fanta, ayam"}
 	fmt.Println(ArrayMerge(arrayA, arrayB))
 
 	arrayC := []string{"ayam", "bebek"}
